@@ -1,4 +1,4 @@
-.App {
+/*.App {
   text-align: center;
 }
 
@@ -35,7 +35,7 @@
   to {
     transform: rotate(360deg);
   }
-}
+}*/
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
 * {
@@ -200,7 +200,6 @@ nav svg {
   min-height: 80vh;
   justify-content: space-between;
   align-items: center;
- 
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right;
@@ -995,5 +994,89 @@ nav svg {
     font-size: 1.6rem;
   }
 }
+
+/*************************** Footer *********************************/
+
+footer {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  padding: 3rem 0;
+  border-top: 1px solid hsl(var(--border));
+}
+
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+footer .banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+footer .banner:last-child {
+  margin-bottom: 0;
+  padding-top: 2rem;
+  border-top: 1px solid hsl(var(--border));
+}
+
+footer .left {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: hsl(var(--primary));
+}
+
+footer .right {
+  text-align: right;
+}
+
+footer p {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  font-size: 0.9rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+}
+
+footer .right p:first-child {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+@media (max-width: 768px) {
+  footer .banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  footer .right {
+    text-align: left;
+    margin-top: 1rem;
+  }
+
+  footer .banner:last-child {
+    flex-direction: column-reverse;
+  }
+
+  footer .banner:last-child .left {
+    margin-top: 1rem;
+  }
+}
+
+@media (hover: hover) {
+  footer .left:hover {
+    color: hsl(var(--primary-foreground));
+    transition: color 0.3s ease;
+  }
+}
+
+
+
+
+
 
 
