@@ -4,12 +4,16 @@ import { Toaster } from 'react-hot-toast';
 import Home from './Pages/Home/Home';
 
 import './App.css'
+import NotFound from './Pages/NotFound/NotFound';
+import Success from './Pages/Success/Success';
 const App = () => {
   return (
     <>
       <Router>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/success' element={<Success/>}/>
+          <Route path='*' element={<NotFound/>}/>
         </Routes>
         <Toaster/>
       </Router>
