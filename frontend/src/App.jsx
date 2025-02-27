@@ -1,24 +1,35 @@
-import React from 'react'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import Home from './Pages/Home/Home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import Home from './pages/Home';
+import Menu from './pages/Menu';
+import Reservation from './pages/Reservation';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Admin from './pages/Admin';
+import './App.css';
+import AdminLogin from './pages/AdminLogin';
 
-import './App.css'
-import NotFound from './Pages/NotFound/NotFound';
-import Success from './Pages/Success/Success';
-const App = () => {
+function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/success' element={<Success/>}/>
-          <Route path='*' element={<NotFound/>}/>
-        </Routes>
-        <Toaster/>
-      </Router>
-    </>
-  )
+    <Router>
+      <div className="app">
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/reservation" element={<Reservation />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path='/login' element={<AdminLogin/>}/>
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
