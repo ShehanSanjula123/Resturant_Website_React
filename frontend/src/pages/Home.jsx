@@ -25,7 +25,7 @@ const Home = () => {
         }}
       >
         <div className="hero-content">
-          <h1>Savoria</h1>
+          <h1>Velora</h1>
           <p>Experience culinary excellence in every bite</p>
           <Link to="/reservation" className="btn">Book a Table</Link>
         </div>
@@ -118,7 +118,7 @@ const Home = () => {
                 className="testimonial-img"
               />
               <p className="testimonial-text">The dining experience at Savoria was absolutely exceptional. From the moment we walked in, the service was impeccable, and every dish was a masterpiece. Will definitely be returning!</p>
-              <p className="testimonial-author">Sarah Johnson</p>
+              <p className="testimonial-author">Sarah Abewickkrama</p>
             </div>
             <div className="testimonial">
               <img 
@@ -136,7 +136,7 @@ const Home = () => {
                 className="testimonial-img"
               />
               <p className="testimonial-text">We celebrated our anniversary at Savoria and it could not have been more perfect. The romantic ambiance, exceptional food, and attentive service made our special night unforgettable.</p>
-              <p className="testimonial-author">Emily Rodriguez</p>
+              <p className="testimonial-author">Rosi Khalif</p>
             </div>
           </Slider>
         </div>

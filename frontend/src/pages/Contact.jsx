@@ -107,7 +107,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3>Email</h3>
-                  <p>info@savoria.com</p>
+                  <p>info@Velora.com</p>
                 </div>
               </div>
               
@@ -117,7 +117,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3>Address</h3>
-                  <p>123 Gourmet Street, Foodville, FC 12345</p>
+                  <p>123 Madamulana Street, Colombo, Srilanka</p>
                 </div>
               </div>
               

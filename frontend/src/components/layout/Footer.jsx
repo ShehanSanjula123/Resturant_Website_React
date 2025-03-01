@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -9,7 +10,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-logo">
-            <h2>Savoria</h2>
+            <h2>Velora</h2>
             <p>Exquisite dining experience since 2010</p>
             <div className="footer-social">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
@@ -43,7 +44,7 @@ const Footer = () => {
             </div>
             <div className="contact-item">
               <FaEnvelope />
-              <span>info@savoria.com</span>
+              <span>info@Velora.com</span>
             </div>
             <div className="contact-item">
               <FaMapMarkerAlt />
@@ -60,7 +61,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Savoria Restaurant. All rights reserved.</p>
+          <p>&copy; {currentYear} Velora Restaurant. All rights reserved.</p>
         </div>
       </div>
       <style jsx>{`

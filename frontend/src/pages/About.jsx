@@ -11,13 +11,13 @@ const About = () => {
           <div>
             <h2>Our Story</h2>
             <p style={{ marginBottom: '1rem' }}>
-              Founded in 2010 by acclaimed chef Marco Rossi, Savoria began as a small family restaurant with a passion for authentic flavors and exceptional dining experiences.
+            Our journey began with a simple vision—to create a place where food lovers can indulge in handcrafted dishes made from the finest ingredients, served with love and authenticity.
             </p>
             <p style={{ marginBottom: '1rem' }}>
-              What started as a humble establishment has grown into one of the city's most celebrated culinary destinations, earning numerous accolades and a loyal following of food enthusiasts.
+            At Velora, we believe that every meal tells a story. Our chefs are dedicated to crafting dishes that celebrate both tradition and innovation, blending classic recipes with modern culinary artistry. Whether you are here for a casual gathering, a romantic dinner, or a special celebration, we aim to provide an unforgettable experience with every bite.
             </p>
             <p>
-              Despite our growth, we remain committed to our founding principles: sourcing the finest ingredients, crafting dishes with meticulous attention to detail, and providing warm, attentive service that makes every guest feel special.
+            From carefully sourced ingredients to a cozy ambiance, every detail at Velora is designed to make you feel at home. Join us and become a part of our story—where good food, great company, and memorable moments come together.
             </p>
           </div>
           <div>
@@ -46,9 +46,9 @@ const About = () => {
               margin: '1rem auto 2rem' 
             }}></div>
             <p style={{ fontSize: '1.2rem', fontStyle: 'italic' }}>
-              "At Savoria, we believe that dining is not just about food—it's an art form that engages all the senses and creates lasting memories. Every dish tells a story, every ingredient has a purpose, and every guest deserves an exceptional experience."
+              At Velora, we believe that dining is not just about food it is an art form that engages all the senses and creates lasting memories. Every dish tells a story, every ingredient has a purpose, and every guest deserves an exceptional experience.
             </p>
-            <p style={{ marginTop: '1rem', fontWeight: '700' }}>— Chef Marco Rossi, Founder</p>
+            <p style={{ marginTop: '1rem', fontWeight: '700' }}>— Chef Marc Antony, Founder</p>
           </div>
         </div>
         
@@ -62,7 +62,7 @@ const About = () => {
                 alt="Chef Marco Rossi" 
                 className="team-member-img"
               />
-              <h3>Marco Rossi</h3>
+              <h3>Marc Antony</h3>
               <p style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>Executive Chef & Founder</p>
               <p>With over 25 years of culinary experience across Europe and America, Chef Marco brings his passion for innovative cuisine to every dish at Savoria.</p>
             </div>

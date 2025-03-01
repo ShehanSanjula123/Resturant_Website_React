@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { FaEdit, FaTrash, FaCheck, FaSignOutAlt } from "react-icons/fa"; // Added FaSignOutAlt for logout
@@ -8,8 +9,85 @@ const Admin = () => {
   const [reservations, setReservations] = useState([]);
   const navigate = useNavigate(); // For navigation
 
+  const PopupForm = ({ onClose, onSubmit }) => {
+    const [newItem, setNewItem] = useState({
+      name: "",
+      category: "starters",
+      price: "",
+      description: "",
+      image: "",
+    });
   
-  // Mock data for menu items
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setNewItem({ ...newItem, [name]: value });
+    };
+  
+    return (
+      <div className="popup-overlay">
+        <div className="popup-content">
+          <h3>Add New Menu Item</h3>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              onSubmit(newItem);
+            }}
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={newItem.name}
+              onChange={handleChange}
+              required
+            />
+            <select
+              name="category"
+              value={newItem.category}
+              onChange={handleChange}
+            >
+              <option value="starters">Starters</option>
+              <option value="mains">Mains</option>
+              <option value="desserts">Desserts</option>
+              <option value="drinks">Drinks</option>
+            </select>
+            <input
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={newItem.price}
+              onChange={handleChange}
+              required
+            />
+            <textarea
+              name="description"
+              placeholder="Description"
+              value={newItem.description}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="image"
+              placeholder="Image URL"
+              value={newItem.image}
+              onChange={handleChange}
+            />
+            <div className="popup-buttons">
+              <button type="submit" className="btn">
+                Add Item
+              </button>
+              <button type="button" className="btn" onClick={onClose}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
+  
+  /* Mock data for menu items
   const [menuItems, setMenuItems] = useState([
     {
       id: 1,
@@ -32,7 +110,7 @@ const Admin = () => {
       price: 10.95,
       description: 'Decadent chocolate cake with a molten center, served with vanilla bean ice cream and raspberry coulis.'
     }
-  ]);
+  ]); */
   
   // Mock data for inquiries
   const [inquiries, setInquiries] = useState([
@@ -54,7 +132,32 @@ const Admin = () => {
       date: '2023-07-11',
       status: 'read'
     }
-  ]);
+  ]);  
+
+  const [menuItems, setMenuItems] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+
+useEffect(() => {
+  fetch("http://localhost:5000/api/menu")
+    .then((res) => res.json())
+    .then((data) => setMenuItems(data))
+    .catch((error) => console.error("Error fetching menu items:", error));
+}, []);
+
+const handleAddItem = async (newItem) => {
+  try {
+    const response = await fetch("http://localhost:5000/api/menu", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newItem),
+    });
+    const addedItem = await response.json();
+    setMenuItems([...menuItems, addedItem]);
+    setShowPopup(false);
+  } catch (error) {
+    console.error("Error adding menu item:", error);
+  }
+};
   
    // Fetch reservations from the backend
    useEffect(() => {
@@ -107,10 +210,39 @@ const Admin = () => {
   };
 
   // Handle menu item deletion
-  const handleDeleteMenuItem = (id) => {
-    setMenuItems(menuItems.filter((item) => item.id !== id));
+  const handleDeleteMenuItem = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/menu/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete Item");
+      }
+
+      setReservations(menuItems.filter((res) => res._id !== id));
+    } catch (error) {
+      console.error("Error deleting Item:", error);
+    }
   };
   
+  // Handle menu item edition
+  const handleEditItem = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/menu/${id}`, {
+        method: "PUT",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to edit Item");
+      }
+
+      setReservations(menuItems.filter((res) => res._id !== id));
+    } catch (error) {
+      console.error("Error Editing Item:", error);
+    }
+  };
+
   // Handle inquiry status change
   const handleInquiryStatus = (id, status) => {
     setInquiries(
@@ -227,10 +359,17 @@ const Admin = () => {
               <h2>Manage Menu Items</h2>
               <button 
                 className="btn"
-                style={{ marginBottom: '1rem' }}
+                style={{ marginBottom: "1rem" }}
+                onClick={() => setShowPopup(true)}
               >
                 Add New Item
               </button>
+              {showPopup && (
+                <PopupForm
+                  onSubmit={handleEditItem}
+                  onClose={() => setShowPopup(false)}
+                />
+              )}
               <table className="admin-table">
                 <thead>
                   <tr>
@@ -245,18 +384,25 @@ const Admin = () => {
                     <tr key={item.id}>
                       <td>{item.name}</td>
                       <td style={{ textTransform: 'capitalize' }}>{item.category}</td>
-                      <td>${item.price.toFixed(2)}</td>
+                      <td>Rs{item.price.toFixed(2)}</td>
                       <td>
                         <div className="admin-actions">
                           <button 
                             className="admin-btn admin-btn-edit"
                             title="Edit"
+                            onClick={() => setShowPopup(true)}
                           >
                             <FaEdit />
                           </button>
+                          {showPopup && (
+                  <PopupForm
+                  onSubmit={handleAddItem}
+                  onClose={() => setShowPopup(false)}
+                />
+              )}
                           <button 
                             className="admin-btn admin-btn-delete"
-                            onClick={() => handleDeleteMenuItem(item.id)}
+                            onClick={() => handleDeleteMenuItem(item._id)}
                             title="Delete"
                           >
                             <FaTrash />
