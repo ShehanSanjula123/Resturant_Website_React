@@ -16,18 +16,6 @@ router.post("/", async (req, res) => {
     }
   });
 
-  router.put("/:id/confirm", async (req, res) => {
-    try {
-      const reservation = await Reservation.findByIdAndUpdate(
-        req.params.id,
-        { status: "confirmed" },
-        { new: true }
-      );
-      res.json(reservation);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  });
 
 // Fetch all reservations
 router.get("/", async (req, res) => {

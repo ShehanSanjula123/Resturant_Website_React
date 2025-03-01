@@ -117,6 +117,7 @@ const Reservation = () => {
         date: new Date(),
         time: "",
         specialRequests: "",
+        status:"pending",
       });
     } catch (error) {
       console.error("Error submitting reservation:", error);
