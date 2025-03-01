@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
-import { FaEdit, FaTrash, FaCheck } from 'react-icons/fa';
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from "react";
+import { FaEdit, FaTrash, FaCheck, FaSignOutAlt } from "react-icons/fa"; // Added FaSignOutAlt for logout
+import { useNavigate } from "react-router-dom"; // For navigation
 
 const Admin = () => {
-  const [activeTab, setActiveTab] = useState('reservations');
+  const [activeTab, setActiveTab] = useState("reservations");
   const [reservations, setReservations] = useState([]);
- 
+  const navigate = useNavigate(); // For navigation
+
   
   // Mock data for menu items
   const [menuItems, setMenuItems] = useState([
@@ -64,10 +67,13 @@ const Admin = () => {
     // Confirm a reservation
     const handleConfirm = async (id) => {
       try {
-        await fetch(`http://localhost:5000/api/reservations/${id}/confirm`, {
+        const response = await fetch(`http://localhost:5000/api/reservations/${id}/confirm`, {
           method: "PUT",
         });
-  
+        
+    if (!response.ok) {
+      throw new Error("Failed to confirm reservation");
+    }
         setReservations((prev) =>
           prev.map((res) =>
             res._id === id ? { ...res, status: "confirmed" } : res
@@ -80,9 +86,13 @@ const Admin = () => {
 
     const handleDelete = async (id) => {
       try {
-        await fetch(`http://localhost:5000/api/reservations/${id}`, {
+        const response = await fetch(`http://localhost:5000/api/reservations/${id}`, {
           method: "DELETE",
         });
+
+        if (!response.ok) {
+          throw new Error("Failed to delete reservation");
+        }
   
         setReservations(reservations.filter((res) => res._id !== id));
       } catch (error) {
@@ -90,6 +100,12 @@ const Admin = () => {
       }
     };
   
+    // Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Clear the token
+    navigate("/login"); // Redirect to the login page
+  };
+
   // Handle menu item deletion
   const handleDeleteMenuItem = (id) => {
     setMenuItems(menuItems.filter((item) => item.id !== id));
@@ -114,6 +130,11 @@ const Admin = () => {
       <div className="container">
         <h1 className="section-title">Admin Dashboard</h1>
         
+        <button className="btn" onClick={handleLogout}>
+            <FaSignOutAlt /> Logout
+          </button>
+        
+
         {/* Admin Tabs */}
         <div className="admin-tabs">
           <div 
@@ -178,7 +199,7 @@ const Admin = () => {
                           {reservation.status === 'pending' && (
                             <button 
                               className="admin-btn admin-btn-edit"
-                              onClick={() => handleConfirm(reservation.id, 'confirmed')}
+                              onClick={() => handleConfirm(reservation._id, 'confirmed')}
                               title="Confirm"
                             >
                               <FaCheck />
@@ -186,7 +207,7 @@ const Admin = () => {
                           )}
                           <button 
                             className="admin-btn admin-btn-delete"
-                            onClick={() => handleDelete(reservation.id)}
+                            onClick={() => handleDelete(reservation._id)}
                             title="Delete"
                           >
                             <FaTrash />
